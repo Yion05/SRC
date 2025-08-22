@@ -23,13 +23,15 @@
         
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(to bottom, #f0f4ff, #e6eeff);
+            /* Updated background to red-orange-yellow gradient */
+            background: linear-gradient(to bottom, #ffeded, #fff3e0); 
             color: #29374b;
             overflow-x: hidden;
         }
         
         .header-bg {
-            background: linear-gradient(120deg, #22ce89, #4946e5);
+            /* Updated header background to red-orange gradient */
+            background: #a62025;
             position: relative;
             overflow: hidden;
             margin-bottom: -3rem;
@@ -63,16 +65,15 @@
         
         .feature-card {
             background: linear-gradient(145deg, #ffffff, #f8faff);
-            border-left: 5px solid #4f46e5;
+            border-left: 5px solid #a62025;
         }
         
         .counter {
             font-variant-numeric: tabular-nums;
         }
         
-        /* Modal styles */
         .modal {
-            display: none; /* Changed to none, will be flex via JS */
+            display: none;
             position: fixed;
             z-index: 1000;
             left: 0;
@@ -89,9 +90,9 @@
         .modal-content {
             display: block;
             margin: auto;
-            height: 80vh; /* All images will have the same height */
-            width: auto;  /* Width will adjust to maintain aspect ratio */
-            max-width: 95%; /* Prevent extra wide images from overflowing */
+            height: 80vh;
+            width: auto;
+            max-width: 95%;
             object-fit: contain;
             animation: zoomIn 0.3s ease-out;
             border-radius: 8px;
@@ -125,14 +126,13 @@
             to { transform: scale(1); opacity: 1; }
         }
         
-        /* Gallery styles */
         .img-hover-zoom {
             overflow: hidden;
-            border-radius: 1rem; /* Make the outer frame's corner rounder */
+            border-radius: 1rem;
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            padding: 0.75rem; /* White space for the frame */
-            background: #2bbbdb;
+            padding: 0.75rem;
+            background: #a62025;
             box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
             border: 1px solid #f3f4f6;
         }
@@ -142,7 +142,7 @@
             width: 100%;
             height: 220px;
             object-fit: cover;
-            border-radius: 0.5rem; /* Rounded corners for the image inside the frame */
+            border-radius: 0.5rem;
         }
         
         .img-hover-zoom:hover img {
@@ -173,14 +173,15 @@
         }
         
         .gradient-text {
-            background: linear-gradient(90deg,  #22ce89, #4946e5);
+            background: #a62025;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         
         .reason-card {
-            background: linear-gradient(145deg, #fee2e2, #fecaca);
+            /* Updated reason card background to light red-orange gradient */
+            background: linear-gradient(145deg, #ffe0e0, #fff0e0);
             border-radius: 16px;
             padding: 24px;
             position: relative;
@@ -195,7 +196,7 @@
             left: 20px;
             font-size: 28px;
             font-weight: bold;
-            color: #ef4444;
+            color: #a62025; /* Retaining red 'X' for consistency */
         }
         
         .reason-card:hover {
@@ -206,7 +207,7 @@
         .benefit-badge {
             display: inline-block;
             padding: 10px 20px;
-            background: linear-gradient(90deg,  #22ce89, #4946e5);
+            background: #a62025;
             color: white;
             border-radius: 50px;
             font-size: 1rem; /* Adjusted for mobile */
@@ -217,7 +218,8 @@
         
         .benefit-badge:hover {
             transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+            /* Updated hover shadow to red-orange theme */
+            box-shadow: 0 5px 15px rgba(255, 100, 0, 0.4); 
         }
 
         /* Back to Top Button */
@@ -227,7 +229,8 @@
             right: 1.5rem;
             width: 3.5rem;
             height: 3.5rem;
-            background-color: #120976;
+            /* Updated back to top button background */
+            background-color: #a62025; 
             color: #ffffff;
             border-radius: 50%;
             display: flex;
@@ -249,7 +252,8 @@
 
         .back-to-top:hover, .back-to-top:focus {
             transform: translateY(-0.3125rem);
-            background-color: #2563eb;
+            /* Updated back to top button hover background */
+            background-color: #a62025; 
         }
 
         /* Responsive adjustments */
@@ -317,16 +321,14 @@
                 </p>
                 <div class="flex items-center justify-center space-x-2 mt-6 flex-wrap">
                     <span class="benefit-badge" data-aos="zoom-in" data-aos-delay="100">【很大的市场】</span>
-                    <span class="text-gray-400 text-2xl" data-aos="fade-in" data-aos-delay="200">X</span>
                     <span class="benefit-badge" data-aos="zoom-in" data-aos-delay="300">【很有需求的产品】</span>
-                    <span class="text-gray-400 text-2xl" data-aos="fade-in" data-aos-delay="400">X</span>
                     <span class="benefit-badge" data-aos="zoom-in" data-aos-delay="500">【符合现代人的商业模式】</span>
                 </div>
             </div>
 
             <!-- Product Showcase -->
             <div class="bg-white rounded-3xl p-6 shadow-lg text-center" data-aos="fade-up">
-                <h3 class="font-bold text-2xl text-blue-600 mb-4">1. 产品</h3>
+                <h3 class="font-bold text-2xl text-[#a62025] mb-4">1. 产品</h3>
                 <p class="text-gray-700 mb-4 text-lg">严重被低估的产品,很多人以为自己不需要,当了解后,才明白自己一直都在钢线上行走着!!!</p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">
                     <div class="img-hover-zoom" data-aos="flip-left" onclick="openModal(this.querySelector('img'))">
@@ -343,7 +345,7 @@
 
             <!-- Market Potential -->
             <div class="bg-white rounded-3xl p-6 shadow-lg text-center mt-12" data-aos="fade-up">
-                <h3 class="font-bold text-2xl text-blue-600 mb-4">2. 市场空间很大</h3>
+                <h3 class="font-bold text-2xl text-[#a62025] mb-4">2. 市场空间很大</h3>
                 <p class="text-gray-700 mb-4 text-lg">市场占有率只有10%,还有90%还未开发</p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">
                     <div class="img-hover-zoom" data-aos="flip-left" onclick="openModal(this.querySelector('img'))">
@@ -360,7 +362,7 @@
 
             <!-- Lifestyle -->
             <div class="bg-white rounded-3xl p-6 shadow-lg text-center mt-12" data-aos="fade-up">
-                <h3 class="font-bold text-2xl text-blue-600 mb-4">3. 符合现代人的【生意模式】</h3>
+                <h3 class="font-bold text-2xl text-[#a62025] mb-4">3. 符合现代人的【生意模式】</h3>
                 <p class="text-gray-700 mb-4 text-lg">这个生意模式,不需要您去销售!!!</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
                     <div class="img-hover-zoom" data-aos="flip-left" onclick="openModal(this.querySelector('img'))">
@@ -375,12 +377,12 @@
 
         <!-- Support Section -->
         <section class="bg-white p-6 md:p-10 rounded-3xl shadow-xl mb-12" data-aos="zoom-in-up">
-            <h2 class="text-center text-3xl md:text-4xl font-bold text-blue-600 mb-6">轻松工作,被动收入</h2>
+            <h2 class="text-center text-3xl md:text-4xl font-bold text-[#a62025] mb-6">轻松工作,被动收入</h2>
             <div class="flex flex-col md:flex-row items-center justify-between gap-8 mb-8">
                 <div class="md:w-1/2">
                     <p class="text-lg text-gray-700 leading-relaxed mb-4">
-                        您的工作只是把我们准备给你的<span class="font-bold text-green-600">【广告】</span>发送给你的朋友或者通过<span class="font-bold text-green-600">【脸书广告】</span>去陌生市场拿名单。<br>
-                        <br>我们的<span class="font-bold text-green-600">【助理】</span>会帮你们跟进这些名单直到他出席。只要他们出席并购买你将会得到联盟行销的分红。
+                        您的工作只是把我们准备给你的<span class="font-bold text-[#a62025]">【广告】</span>发送给你的朋友或者通过<span class="font-bold text-[#a62025]">【脸书广告】</span>去陌生市场拿名单。<br>
+                        <br>我们的<span class="font-bold text-[#a62025]">【助理】</span>会帮你们跟进这些名单直到他出席。只要他们出席并购买你将会得到联盟行销的分红。
                     </p>
                     <div class="img-hover-zoom" data-aos="flip-left" data-aos-delay="200" onclick="openModal(this.querySelector('img'))">
                         <img src="https://src-site.vercel.app/4.png" alt="" class="w-full">
@@ -400,12 +402,12 @@
 
             <!-- Income Calculation -->
             <div class="bg-blue-50 p-6 md:p-8 rounded-2xl shadow-inner text-center">
-                <h3 class="text-2xl md:text-3xl font-bold text-blue-600 mb-4">被动收入计算</h3>
+                <h3 class="text-2xl md:text-3xl font-bold text-[#a62025] mb-4">被动收入计算</h3>
                 <p class="text-lg text-gray-700 mb-6">
                     想像一下每一天你有10位你邀请来的联盟行销出广告他们每个月都可以成交10单你每个月的被动收入就是
                 </p>
                 <div class="flex justify-center items-center mb-6">
-                    <span class="text-4xl md:text-6xl font-extrabold text-green-600 count-up" data-count="9000">0</span>
+                    <span class="text-4xl md:text-6xl font-extrabold text-[#a62025] count-up" data-count="9000">0</span>
                 </div>
                 <div class="img-hover-zoom" data-aos="flip-left" data-aos-delay="200" onclick="openModal(this.querySelector('img'))">
                    <img src="https://src-site.vercel.app/5.png" alt="工作流程图片" class="w-full">
@@ -421,23 +423,23 @@
 
         <!-- CTA Section -->
         <section class="text-center my-12" data-aos="fade-up">
-            <a href="https://app.mysmartwills.com/portal/register" class="inline-block bg-gradient-to-r from-green-500 to-blue-600 text-white text-2xl md:text-3xl font-bold py-4 px-12 rounded-full shadow-lg hover:shadow-2xl transform transition-all duration-300 pulse">
+            <a href="https://app.mysmartwills.com/portal/register" class="inline-block bg-[#a62025] text-white text-2xl md:text-3xl font-bold py-4 px-12 rounded-full shadow-lg hover:shadow-2xl transform transition-all duration-300 pulse">
                 我要加入了!!!
             </a>
             <div class="mt-8 text-lg text-gray-700">
                 <p class="font-bold mb-4">加入马上送你以下礼物:</p>
                 <ul class="list-none space-y-2 max-w-2xl mx-auto text-left">
-                    <li class="bg-blue-100 p-3 rounded-xl border border-blue-200" data-aos="fade-right">
-                        <span class="font-semibold text-blue-600"><i class="fas fa-gift mr-2"></i>价值 RM1266 创业礼包</span>
+                    <li class="bg-orange-100 p-3 rounded-xl border border-red-200" data-aos="fade-right">
+                        <span class="font-semibold text-[#a62025]"><i class="fas fa-gift mr-2"></i>价值 RM1266 创业礼包</span>
                     </li>
-                    <li class="bg-blue-100 p-3 rounded-xl border border-blue-200" data-aos="fade-left">
-                        <span class="font-semibold text-blue-600"><i class="fas fa-book mr-2"></i>RM 999 的脸书广告营销课程</span>
+                    <li class="bg-orange-100 p-3 rounded-xl border border-red-200" data-aos="fade-left">
+                        <span class="font-semibold text-[#a62025]"><i class="fas fa-book mr-2"></i>RM 999 的脸书广告营销课程</span>
                     </li>
-                    <li class="bg-blue-100 p-3 rounded-xl border border-blue-200" data-aos="fade-right">
-                        <span class="font-semibold text-blue-600"><i class="fas fa-tools mr-2"></i>系统,培训,广告视频,图片,免费助理支援</span>
+                    <li class="bg-orange-100 p-3 rounded-xl border border-red-200" data-aos="fade-right">
+                        <span class="font-semibold text-[#a62025]"><i class="fas fa-tools mr-2"></i>系统,培训,广告视频,图片,免费助理支援</span>
                     </li>
-                    <li class="bg-blue-100 p-3 rounded-xl border border-blue-200" data-aos="fade-left">
-                        <span class="font-semibold text-blue-600"><i class="fas fa-hand-holding-usd mr-2"></i>还有更多等你领取</span>
+                    <li class="bg-orange-100 p-3 rounded-xl border border-red-200" data-aos="fade-left">
+                        <span class="font-semibold text-[#a62025]"><i class="fas fa-hand-holding-usd mr-2"></i>还有更多等你领取</span>
                     </li>
                 </ul>
             </div>
