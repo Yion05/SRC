@@ -275,7 +275,6 @@
     </style>
 </head>
 <body class="min-h-screen">
-    <!-- Header -->
     <header class="header-bg text-white py-16 md:py-24 px-4">
         <div class="container mx-auto max-w-6xl text-center relative z-10">
             <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 pulse">
@@ -288,7 +287,6 @@
     </header>
 
     <main class="container mx-auto max-w-6xl px-4 py-16">
-        <!-- Reasons Section -->
         <section class="mb-20" data-aos="fade-up">
             <div class="bg-white rounded-3xl p-6 shadow-lg text-center mt-12">
                 <div class="grid md:grid-cols-2 gap-8">
@@ -317,7 +315,6 @@
             </div>    
         </section>
 
-        <!-- Benefits Section -->
         <section class="mb-20">
             <div class="text-center mb-12 md:mb-20">
                 <p class="text-xl md:text-2xl font-semibold text-center text-gray-700" data-aos="fade-down">
@@ -330,7 +327,6 @@
                 </div>
             </div>
 
-            <!-- Product Showcase -->
             <div class="bg-white rounded-3xl p-6 shadow-lg text-center" data-aos="fade-up">
                 <h3 class="font-bold text-2xl text-[#a62025] mb-4">1. 产品</h3>
                 <p class="text-gray-700 mb-4 text-lg">严重被低估的产品,很多人以为自己不需要,当了解后,才明白自己一直都在钢线上行走着!!!</p>
@@ -347,7 +343,6 @@
                 </div>
             </div>
 
-            <!-- Market Potential -->
             <div class="bg-white rounded-3xl p-6 shadow-lg text-center mt-12" data-aos="fade-up">
                 <h3 class="font-bold text-2xl text-[#a62025] mb-4">2. 市场空间很大</h3>
                 <p class="text-gray-700 mb-4 text-lg">市场占有率只有10%,还有90%还未开发</p>
@@ -364,7 +359,6 @@
                 </div>
             </div>
 
-            <!-- Lifestyle -->
             <div class="bg-white rounded-3xl p-6 shadow-lg text-center mt-12" data-aos="fade-up">
                 <h3 class="font-bold text-2xl text-[#a62025] mb-4">3. 符合现代人的【生意模式】</h3>
                 <p class="text-gray-700 mb-4 text-lg">这个生意模式,不需要您去销售!!!</p>
@@ -377,9 +371,18 @@
                     </div>
                 </div>
             </div>
+
+            <div class="bg-white rounded-3xl p-6 shadow-lg text-center mt-12" data-aos="fade-up">
+                <h3 class="font-bold text-2xl text-[#a62025] mb-4">4. 培训</h3>
+                <p class="text-gray-700 mb-4 text-lg">每周六坚持培训，教你营销、广告、小红书运营！</p>
+                <div class="grid grid-cols-1 md:grid-cols-1 gap-0 mt-8">
+                    <div class="img-hover-zoom" data-aos="flip-left" onclick="openModal(this.querySelector('img'))">
+                        <img src="https://src-site.vercel.app/4_1.png" alt="" class="shadow w-full">
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <!-- Support Section -->
         <section class="bg-white p-6 md:p-10 rounded-3xl shadow-xl mb-12" data-aos="zoom-in-up">
             <h2 class="text-center text-3xl md:text-4xl font-bold text-[#a62025] mb-6">轻松工作,被动收入</h2>
             <div class="flex flex-col md:flex-row items-center justify-between gap-8 mb-8">
@@ -404,7 +407,6 @@
 
             <hr class="my-8 border-t border-gray-300">
 
-            <!-- Income Calculation -->
             <div class="bg-blue-50 p-6 md:p-8 rounded-2xl shadow-inner text-center">
                 <h3 class="text-2xl md:text-3xl font-bold text-[#a62025] mb-4">被动收入计算</h3>
                 <p class="text-lg text-gray-700 mb-6">
@@ -419,13 +421,11 @@
             </div>
         </section>
 
-        <!-- Image Modal -->
         <div id="imageModal" class="modal">
             <span class="close" onclick="closeModal()">&times;</span>
             <img class="modal-content" id="modalImage">
         </div>
 
-        <!-- CTA Section -->
         <section class="text-center my-12" data-aos="fade-up">
             <a href="https://app.mysmartwills.com/portal/register" class="inline-block bg-[#a62025] text-white text-2xl md:text-3xl font-bold py-4 px-12 rounded-full shadow-lg hover:shadow-2xl transform transition-all duration-300 pulse">
                 我要加入了!!!
@@ -458,7 +458,6 @@
             <p>公司投资课程!聘请市场有价值的导师!</p>
         </footer>
 
-        <!-- Back to Top Button -->
         <div class="back-to-top" onclick="window.scrollTo({top: 0});">
             <i class="fas fa-arrow-up"></i>
         </div>
@@ -467,14 +466,12 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize AOS library for scroll animations
             AOS.init({
                 duration: 800,
                 once: true,
                 offset: 50
             });
             
-            // Intersection Observer for number counter
             const observerOptions = {
                 root: null,
                 rootMargin: '0px',
@@ -495,7 +492,6 @@
                 countUpObserver.observe(el);
             });
             
-            // Number counting animation function
             function animateValue(obj, start, end, duration) {
                 let startTimestamp = null;
                 const step = (timestamp) => {
@@ -509,19 +505,17 @@
                 window.requestAnimationFrame(step);
             }
 
-            // Back to top button visibility
             const backToTopButton = document.querySelector('.back-to-top');
             window.addEventListener('scroll', function() {
                 backToTopButton.classList.toggle('active', window.pageYOffset > 300);
             });
         });
 
-        // Modal functionality
         const modal = document.getElementById("imageModal");
         const modalImg = document.getElementById("modalImage");
         
         function openModal(element) {
-            modal.style.display = "flex"; // Use flex to enable centering
+            modal.style.display = "flex"; 
             modalImg.src = element.src;
             document.addEventListener('keydown', handleKeyDown);
         }
@@ -532,7 +526,6 @@
         }
         
         modal.addEventListener('click', function(event) {
-            // Close if the outer modal area (but not the image itself) is clicked
             if (event.target === modal) {
                 closeModal();
             }
