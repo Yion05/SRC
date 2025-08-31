@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRC Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Updated background to red-orange-yellow gradient */
+            background: linear-gradient(to bottom, #ffeded, #fff3e0); 
+            color: #29374b;
+            overflow-x: hidden;
+        }
+        
+        .header-bg {
+            /* Updated header background to red-orange gradient */
+            background: #a62025;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: -3rem;
+        }
+        
+        .header-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.1' d='M0,128L48,117.3C96,107,192,85,288,112C384,139,480,213,576,218.7C672,224,768,160,864,138.7C960,117,1056,139,1152,149.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: center;
+            opacity: 0.2;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-card {
+            background: linear-gradient(145deg, #ffffff, #f8faff);
+            border-left: 5px solid #a62025;
+        }
+        
+        .counter {
+            font-variant-numeric: tabular-nums;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s ease-out;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            display: block;
+            margin: auto;
+            height: 80vh;
+            width: auto;
+            max-width: 95%;
+            object-fit: contain;
+            animation: zoomIn 0.3s ease-out;
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 1001;
+        }
+        
+        .close:hover {
+            color: #bbb;
+            transform: scale(1.1);
+        }
+
+        footer p{
+            margin-top: 10px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .img-hover-zoom {
+            overflow: hidden;
+            border-radius: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 0.75rem;
+            background: #a62025;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            border: 1px solid #f3f4f6;
+        }
+        
+        .img-hover-zoom img {
+            transition: transform 0.7s ease;
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+        }
+        
+        .img-hover-zoom:hover img {
+            transform: scale(1.08);
+        }
+        
+        .img-hover-zoom:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+        
+        .pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .gradient-text {
+            background: #a62025;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .reason-card {
+            /* Updated reason card background to light red-orange gradient */
+            background: linear-gradient(145deg, #ffe0e0, #fff0e0);
+            border-radius: 16px;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .reason-card::before {
+            content: '✕';
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #a62025; /* Retaining red 'X' for consistency */
+        }
+        
+        .reason-card:hover {
+            transform: translateY(-5px) rotate(-1deg);
+            box-shadow: 0 15px 30px rgba(239, 68, 68, 0.15);
+        }
+        
+        .benefit-badge {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #a62025;
+            color: white;
+            border-radius: 50px;
+            font-size: 1rem; /* Adjusted for mobile */
+            font-weight: 600;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .benefit-badge:hover {
+            transform: scale(1.05);
+            /* Updated hover shadow to red-orange theme */
+            box-shadow: 0 5px 15px rgba(255, 100, 0, 0.4); 
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 3.5rem;
+            height: 3.5rem;
+            /* Updated back to top button background */
+            background-color: #a62025; 
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+            z-index: 999;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover, .back-to-top:focus {
+            transform: translateY(-0.3125rem);
+            /* Updated back to top button hover background */
+            background-color: #a62025; 
+        }
+
+        /* Responsive adjustments */
+        @media (min-width: 768px) {
+            .benefit-badge {
+                font-size: 1.5rem;
+                margin: 0 5px;
+            }
+            .back-to-top {
+                width: 4rem;
+                height: 4rem;
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <header class="header-bg text-white py-16 md:py-24 px-4">
+        <div class="container mx-auto max-w-6xl text-center relative z-10">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 pulse">
+                Trust Me!! This Is Your Last Time Starting a Business
+            </h1>
+            <p class="text-xl md:text-2xl font-light max-w-3xl mx-auto">
+                Looking for extra income, but dislike sales? We'll close the deals for you.
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto max-w-6xl px-4 py-16">
+        <section class="mb-20" data-aos="fade-up">
+            <div class="bg-white rounded-3xl p-6 shadow-lg text-center mt-12">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="reason-card" data-aos="fade-right">
+                        <p class="text-lg font-medium text-gray-800 ml-8">I'm shy and don't like asking people to support my product.</p>
+                    </div>
+                    
+                    <div class="reason-card" data-aos="fade-left">
+                        <p class="text-lg font-medium text-gray-800 ml-8">I have no sales experience, I really don't know how to sell.</p>
+                    </div>
+                    
+                    <div class="reason-card" data-aos="fade-right">
+                        <p class="text-lg font-medium text-gray-800 ml-8">I'm already tired after coming home from work, I have no time for anything else.</p>
+                    </div>
+                    
+                    <div class="reason-card" data-aos="fade-left">
+                        <p class="text-lg font-medium text-gray-800 ml-8">I don't have business capital; starting a business costs at least a few thousand.</p>
+                    </div>
+                </div>
+                
+                <p class="text-center text-xl font-medium mt-12 text-gray-700" data-aos="zoom-in">
+                    Now our <span class="font-bold text-green-600 gradient-text">[PLAN]</span> can solve your problems above and also bring you
+                    <br>
+                    <span class="font-bold text-green-600 text-2xl md:text-3xl gradient-text">[PASSIVE INCOME]</span>
+                </p>
+            </div>    
+        </section>
+
+        <section class="mb-20">
+            <div class="text-center mb-12 md:mb-20">
+                <p class="text-xl md:text-2xl font-semibold text-center text-gray-700" data-aos="fade-down">
+                    In this era, to make money, you must combine:
+                </p>
+                <div class="flex items-center justify-center space-x-2 mt-6 flex-wrap">
+                    <span class="benefit-badge" data-aos="zoom-in" data-aos-delay="100">1. [A Huge Market]</span>
+                </div>
+                    <div class="flex items-center justify-center space-x-2 mt-6 flex-wrap">
+                    <span class="benefit-badge" data-aos="zoom-in" data-aos-delay="300">2. [A High-Demand Product]</span>
+                </div>
+                    <div class="flex items-center justify-center space-x-2 mt-6 flex-wrap">
+                    <span class="benefit-badge" data-aos="zoom-in" data-aos-delay="500">3. [A Business Model That Fits Modern People]</span>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 shadow-lg text-center mt-12" data-aos="fade-up">
+                <h3 class="font-bold text-2xl text-[#a62025] mb-4">1. The Market is Huge</h3>
+                <p class="text-gray-700 mb-4 text-lg">Market share is only 10%, with 90% still untapped.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">
+                    <div class="img-hover-zoom" data-aos="flip-left" onclick="openModal(this.querySelector('img'))">
+                        <img src="https://src-site.vercel.app/2_1.jpg" alt="Market statistic 1" class="shadow w-full">
+                    </div>
+                    <div class="img-hover-zoom" data-aos="flip-left" data-aos-delay="100" onclick="openModal(this.querySelector('img'))">
+                        <img src="https://src-site.vercel.app/2_2.jpg" alt="Market statistic 2" class="shadow w-full">
+                    </div>
+                    <div class="img-hover-zoom" data-aos="flip-left" data-aos-delay="200" onclick="openModal(this.querySelector('img'))">
+                        <img src="https://src-site.vercel.app/2_3.jpg" alt="Market statistic 3" class="shadow w-full">
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 shadow-lg text-center mt-12" data-aos="fade-up">
+                <h3 class="font-bold text-2xl text-[#a62025] mb-4">2. The Product</h3>
+                <p class="text-gray-700 mb-4 text-lg">A seriously underrated product. Many people think they don't need it, but after understanding it, they realize they've been walking a tightrope!!!</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">
+                    <div class="img-hover-zoom" data-aos="flip-left" onclick="openModal(this.querySelector('img'))">
+                        <img src="https://media2.fishtank.my/media/melody/assets/article/article-640x360-medium-box_21.png?ext=.png" alt="Product example 1" class="shadow w-full">
+                    </div>
+                    <div class="img-hover-zoom" data-aos="flip-left" data-aos-delay="100" onclick="openModal(this.querySelector('img'))">
+                        <img src="https://src-site.vercel.app/1_2.jpg" alt="Product example 2" class="shadow w-full">
+                    </div>
+                    <div class="img-hover-zoom" data-aos="flip-left" data-aos-delay="200" onclick="openModal(this.querySelector('img'))">
+                        <img src="https://i.ytimg.com/vi/CrqgFouVvUM/hqdefault.jpg" alt="Product example 3" class="shadow w-full">
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 shadow-lg text-center mt-12" data-aos="fade-up">
+                <h3 class="font-bold text-2xl text-[#a62025] mb-4">3. A [Business Model] That Fits Modern People</h3>
+                <p class="text-gray-700 mb-4 text-lg">This business model doesn't require you to sell!!!</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                    <div class="img-hover-zoom" data-aos="flip-left" onclick="openModal(this.querySelector('img'))">
+                        <img src="https://src-site.vercel.app/3_1.png" alt="Business model 1" class="shadow w-full">
+                    </div>
+                    <div class="img-hover-zoom" data-aos="flip-left" data-aos-delay="100" onclick="openModal(this.querySelector('img'))">
+                        <img src="https://src-site.vercel.app/3_3.png" alt="Business model 2" class="shadow w-full">
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 shadow-lg text-center mt-12" data-aos="fade-up">
+                <h3 class="font-bold text-2xl text-[#a62025] mb-4">Training</h3>
+                <p class="text-gray-700 mb-4 text-lg">We provide training every Saturday, teaching you marketing, advertising, and Xiaohongshu (Little Red Book) operations!</p>
+                <div class="grid grid-cols-1 md:grid-cols-1 gap-0 mt-8">
+                    <div class="img-hover-zoom" data-aos="flip-left" onclick="openModal(this.querySelector('img'))">
+                        <img src="https://src-site.vercel.app/4_1.png" alt="Training session" class="shadow w-full">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white p-6 md:p-10 rounded-3xl shadow-xl mb-12" data-aos="zoom-in-up">
+            <h2 class="text-center text-3xl md:text-4xl font-bold text-[#a62025] mb-6">Easy Work, Passive Income</h2>
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8 mb-8">
+                <div class="md:w-1/2">
+                    <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                        Your job is just to send the <span class="font-bold text-[#a62025]">[advertisements]</span> we prepare for you to your friends or get leads from the cold market through <span class="font-bold text-[#a62025]">[Facebook Ads]</span>.<br>
+                        <br>Our <span class="font-bold text-[#a62025]">[assistants]</span> will help you follow up with these leads until they attend. As long as they attend and make a purchase, you will get a commission from our affiliate marketing program.
+                    </p>
+                    <div class="img-hover-zoom" data-aos="flip-left" data-aos-delay="200" onclick="openModal(this.querySelector('img'))">
+                        <img src="https://src-site.vercel.app/4.png" alt="Workflow diagram" class="w-full">
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                        Through advertising, you will receive many sign-ups every day. Our customer service will help you follow up with them. After they join, you get a commission. We help you train them and teach them how to get more leads through Facebook Ads, Xiaohongshu, and Tiktok.
+                    </p>
+                    <p class="text-lg font-bold text-gray-700">
+                        You can also earn passive income through their performance.
+                    </p>
+                </div>
+            </div>
+
+            <hr class="my-8 border-t border-gray-300">
+
+            <div class="bg-blue-50 p-6 md:p-8 rounded-2xl shadow-inner text-center">
+                <h3 class="text-2xl md:text-3xl font-bold text-[#a62025] mb-4">Passive Income Calculation</h3>
+                <p class="text-lg text-gray-700 mb-6">
+                    Imagine if you have 10 affiliates you invited running ads every day, and they can each close 10 deals per month. Your monthly passive income would be:
+                </p>
+                <div class="flex justify-center items-center mb-6">
+                    <span class="text-4xl md:text-6xl font-extrabold text-[#a62025] count-up" data-count="9000">0</span>
+                </div>
+                <div class="img-hover-zoom" data-aos="flip-left" data-aos-delay="200" onclick="openModal(this.querySelector('img'))">
+                   <img src="https://src-site.vercel.app/5.png" alt="Income calculation example" class="w-full">
+                </div>
+            </div>
+        </section>
+
+        <div id="imageModal" class="modal">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img class="modal-content" id="modalImage">
+        </div>
+
+        <section class="text-center my-12" data-aos="fade-up">
+            <a href="https://app.mysmartwills.com/portal/register" class="inline-block bg-[#a62025] text-white text-2xl md:text-3xl font-bold py-4 px-12 rounded-full shadow-lg hover:shadow-2xl transform transition-all duration-300 pulse">
+                I Want to Join!!!
+            </a>
+            <div class="mt-8 text-lg text-gray-700">
+                <p class="font-bold mb-4">Join now and immediately receive these gifts:</p>
+                <ul class="list-none space-y-2 max-w-2xl mx-auto text-left">
+                    <li class="bg-orange-100 p-3 rounded-xl border border-red-200" data-aos="fade-right">
+                        <span class="font-semibold text-[#a62025] text-center block text-3xl"><i class="fas fa-gift mr-2"></i>Startup Gift Pack worth RM1266<i class="fas fa-gift ml-2"></i></span>
+                    </li>
+                    <li class="bg-orange-100 p-3 rounded-xl border border-red-200" data-aos="fade-left">
+                        <span class="font-semibold text-[#a62025] text-center block text-3xl"><i class="fas fa-book mr-2"></i>RM999 Facebook Ads Marketing Course<i class="fas fa-book ml-2"></i></span>
+                    </li>
+                    <li class="bg-orange-100 p-3 rounded-xl border border-red-200" data-aos="fade-right">
+                        <span class="font-semibold text-[#a62025] text-center block text-3xl"><i class="fas fa-tools mr-2"></i>System, Training, Ad Videos, Images, Free Assistant Support<i class="fas fa-tools ml-2"></i></span>
+                    </li>
+                    <li class="bg-orange-100 p-3 rounded-xl border border-red-200" data-aos="fade-left">
+                        <span class="font-semibold text-[#a62025] text-center block text-3xl"><i class="fas fa-hand-holding-usd mr-2"></i>And much more for you to claim<i class="fas fa-hand-holding-usd ml-2"></i></span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        
+        <footer class="text-center text-gray-500 text-sm mt-12 pb-4" data-aos="fade-in">
+            <a href="https://wa.me/60122349929" class="inline-block bg-[#a62025] mb-6 text-white text-2xl md:text-3xl font-bold py-4 px-12 rounded-full shadow-lg hover:shadow-2xl transform transition-all duration-300">
+                <i class="fas fa-phone"></i> Contact Us
+            </a>
+            <p>We deliver on our promises!!! We have classes every Saturday.</p>
+            <p>The company invests in courses and hires valuable mentors from the market!</p>
+        </footer>
+
+        <div class="back-to-top" onclick="window.scrollTo({top: 0});">
+            <i class="fas fa-arrow-up"></i>
+        </div>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                once: true,
+                offset: 50
+            });
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5
+            };
+            
+            const countUpObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const el = entry.target;
+                        animateValue(el, 0, parseInt(el.getAttribute('data-count')), 2000);
+                        observer.unobserve(el); // Stop observing after animation
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.count-up').forEach(el => {
+                countUpObserver.observe(el);
+            });
+            
+            function animateValue(obj, start, end, duration) {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+
+            const backToTopButton = document.querySelector('.back-to-top');
+            window.addEventListener('scroll', function() {
+                backToTopButton.classList.toggle('active', window.pageYOffset > 300);
+            });
+        });
+
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("modalImage");
+        
+        function openModal(element) {
+            modal.style.display = "flex"; 
+            modalImg.src = element.src;
+            document.addEventListener('keydown', handleKeyDown);
+        }
+        
+        function closeModal() {
+            modal.style.display = "none";
+            document.removeEventListener('keydown', handleKeyDown);
+        }
+        
+        modal.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+        
+        function handleKeyDown(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
