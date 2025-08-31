@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRC 网站</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Updated background to red-orange-yellow gradient */
+            background: linear-gradient(to bottom, #ffeded, #fff3e0); 
+            color: #29374b;
+            overflow-x: hidden;
+        }
+        
+        .header-bg {
+            /* Updated header background to red-orange gradient */
+            background: #a62025;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: -3rem;
+        }
+        
+        .header-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.1' d='M0,128L48,117.3C96,107,192,85,288,112C384,139,480,213,576,218.7C672,224,768,160,864,138.7C960,117,1056,139,1152,149.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: center;
+            opacity: 0.2;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-card {
+            background: linear-gradient(145deg, #ffffff, #f8faff);
+            border-left: 5px solid #a62025;
+        }
+        
+        .counter {
+            font-variant-numeric: tabular-nums;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s ease-out;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            display: block;
+            margin: auto;
+            height: 80vh;
+            width: auto;
+            max-width: 95%;
+            object-fit: contain;
+            animation: zoomIn 0.3s ease-out;
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 1001;
+        }
+        
+        .close:hover {
+            color: #bbb;
+            transform: scale(1.1);
+        }
+
+        footer p{
+            margin-top: 10px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .img-hover-zoom {
+            overflow: hidden;
+            border-radius: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 0.75rem;
+            background: #a62025;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            border: 1px solid #f3f4f6;
+        }
+        
+        .img-hover-zoom img {
+            transition: transform 0.7s ease;
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+        }
+        
+        .img-hover-zoom:hover img {
+            transform: scale(1.08);
+        }
+        
+        .img-hover-zoom:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+        
+        .pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .gradient-text {
+            background: #a62025;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .reason-card {
+            /* Updated reason card background to light red-orange gradient */
+            background: linear-gradient(145deg, #ffe0e0, #fff0e0);
+            border-radius: 16px;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .reason-card::before {
+            content: '✕';
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #a62025; /* Retaining red 'X' for consistency */
+        }
+        
+        .reason-card:hover {
+            transform: translateY(-5px) rotate(-1deg);
+            box-shadow: 0 15px 30px rgba(239, 68, 68, 0.15);
+        }
+        
+        .benefit-badge {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #a62025;
+            color: white;
+            border-radius: 50px;
+            font-size: 1rem; /* Adjusted for mobile */
+            font-weight: 600;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .benefit-badge:hover {
+            transform: scale(1.05);
+            /* Updated hover shadow to red-orange theme */
+            box-shadow: 0 5px 15px rgba(255, 100, 0, 0.4); 
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 3.5rem;
+            height: 3.5rem;
+            /* Updated back to top button background */
+            background-color: #a62025; 
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+            z-index: 999;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover, .back-to-top:focus {
+            transform: translateY(-0.3125rem);
+            /* Updated back to top button hover background */
+            background-color: #a62025; 
+        }
+
+        /* Responsive adjustments */
+        @media (min-width: 768px) {
+            .benefit-badge {
+                font-size: 1.5rem;
+                margin: 0 5px;
+            }
+            .back-to-top {
+                width: 4rem;
+                height: 4rem;
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <header class="header-bg text-white py-16 md:py-24 px-4">
+        <div class="container mx-auto max-w-6xl text-center relative z-10">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 pulse">
+                相信我!!这是你最后一次创业了
+            </h1>
+            <p class="text-xl md:text-2xl font-light max-w-3xl mx-auto">
+                想找额外收入,不喜欢销售?? 我们帮你成交
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto max-w-6xl px-4 py-16">
+        <section class="mb-20" data-aos="fade-up">
+            <div class="bg-white rounded-3xl p-6 shadow-lg text-center mt-12">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="reason-card" data-aos="fade-right">
+                        <p class="text-lg font-medium text-gray-800 ml-8">我脸皮很薄,不喜欢求人Support我的产品</p>
+                    </div>
+                    
+                    <div class="reason-card" data-aos="fade-left">
+                        <p class="text-lg font-medium text-gray-800 ml-8">我没有销售经验,根本不会卖东西</p>
+                    </div>
+                    
+                    <div class="reason-card" data-aos="fade-right">
+                        <p class="text-lg font-medium text-gray-800 ml-8">我工作回家已经很累了,根本没时间做其它东西</p>
+                    </div>
+                    
+                    <div class="reason-card" data-aos="fade-left">
+                        <p class="text-lg font-medium text-gray-800 ml-8">我没有创业本金,做生意最少都要几千块</p>
+                    </div>
+                </div>
+                
+                <p class="text-center text-xl font-medium mt-12 text-gray-700" data-aos="zoom-in">
+                    现在<span class="font-bold text-green-600 gradient-text">【方案】</span>可以解决你以上的问题又可以带给你
+                    <br>
+                    <span class="font-bold text-green-600 text-2xl md:text-3xl gradient-text">【被动收入】</span>
+                </p>
+            </div>    
+        </section>
+
+        <section class="mb-20">
+            <div class="text-center mb-12 md:mb-20">
+                <p class="text-xl md:text-2xl font-semibold text-center text-gray-700" data-aos="fade-down">
+                    在这个年代,要赚钱,你必须结合
+                </p>
+                <div class="flex items-center justify-center space-x-2 mt-6 flex-wrap">
+                    <span class="benefit-badge" data-aos="zoom-in" data-aos-delay="100">1.【很大的市场】</span>
+                </div>
+                    <div class="flex items-center justify-center space-x-2 mt-6 flex-wrap">
+                    <span class="benefit-badge" data-aos="zoom-in" data-aos-delay="300">2.【很有需求的产品】</span>
+                </div>
+                    <div class="flex items-center justify-center space-x-2 mt-6 flex-wrap">
+                    <span class="benefit-badge" data-aos="zoom-in" data-aos-delay="500">3.【符合现代人的商业模式】</span>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 shadow-lg text-center mt-12" data-aos="fade-up">
+                <h3 class="font-bold text-2xl text-[#a62025] mb-4">1. 市场空间很大</h3>
+                <p class="text-gray-700 mb-4 text-lg">市场占有率只有10%,还有90%还未开发</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">
+                    <div class="img-hover-zoom" data-aos="flip-left" onclick="openModal(this.querySelector('img'))">
+                        <img src="https://src-site.vercel.app/2_1.jpg" alt="" class="shadow w-full">
+                    </div>
+                    <div class="img-hover-zoom" data-aos="flip-left" data-aos-delay="100" onclick="openModal(this.querySelector('img'))">
+                        <img src="https://src-site.vercel.app/2_2.jpg" alt="" class="shadow w-full">
+                    </div>
+                    <div class="img-hover-zoom" data-aos="flip-left" data-aos-delay="200" onclick="openModal(this.querySelector('img'))">
+                        <img src="https://src-site.vercel.app/2_3.jpg" alt="" class="shadow w-full">
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 shadow-lg text-center mt-12" data-aos="fade-up">
+                <h3 class="font-bold text-2xl text-[#a62025] mb-4">2. 产品</h3>
+                <p class="text-gray-700 mb-4 text-lg">严重被低估的产品,很多人以为自己不需要,当了解后,才明白自己一直都在钢线上行走着!!!</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">
+                    <div class="img-hover-zoom" data-aos="flip-left" onclick="openModal(this.querySelector('img'))">
+                        <img src="https://media2.fishtank.my/media/melody/assets/article/article-640x360-medium-box_21.png?ext=.png" alt="" class="shadow w-full">
+                    </div>
+                    <div class="img-hover-zoom" data-aos="flip-left" data-aos-delay="100" onclick="openModal(this.querySelector('img'))">
+                        <img src="https://src-site.vercel.app/1_2.jpg" alt="" class="shadow w-full">
+                    </div>
+                    <div class="img-hover-zoom" data-aos="flip-left" data-aos-delay="200" onclick="openModal(this.querySelector('img'))">
+                        <img src="https://i.ytimg.com/vi/CrqgFouVvUM/hqdefault.jpg" alt="" class="shadow w-full">
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 shadow-lg text-center mt-12" data-aos="fade-up">
+                <h3 class="font-bold text-2xl text-[#a62025] mb-4">3. 符合现代人的【生意模式】</h3>
+                <p class="text-gray-700 mb-4 text-lg">这个生意模式,不需要您去销售!!!</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                    <div class="img-hover-zoom" data-aos="flip-left" onclick="openModal(this.querySelector('img'))">
+                        <img src="https://src-site.vercel.app/3_1.png" alt="" class="shadow w-full">
+                    </div>
+                    <div class="img-hover-zoom" data-aos="flip-left" data-aos-delay="100" onclick="openModal(this.querySelector('img'))">
+                        <img src="https://src-site.vercel.app/3_3.png" alt="" class="shadow w-full">
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 shadow-lg text-center mt-12" data-aos="fade-up">
+                <h3 class="font-bold text-2xl text-[#a62025] mb-4">培训</h3>
+                <p class="text-gray-700 mb-4 text-lg">每周六坚持培训，教你营销、广告、小红书运营！</p>
+                <div class="grid grid-cols-1 md:grid-cols-1 gap-0 mt-8">
+                    <div class="img-hover-zoom" data-aos="flip-left" onclick="openModal(this.querySelector('img'))">
+                        <img src="https://src-site.vercel.app/4_1.png" alt="" class="shadow w-full">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white p-6 md:p-10 rounded-3xl shadow-xl mb-12" data-aos="zoom-in-up">
+            <h2 class="text-center text-3xl md:text-4xl font-bold text-[#a62025] mb-6">轻松工作,被动收入</h2>
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8 mb-8">
+                <div class="md:w-1/2">
+                    <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                        您的工作只是把我们准备给你的<span class="font-bold text-[#a62025]">【广告】</span>发送给你的朋友或者通过<span class="font-bold text-[#a62025]">【脸书广告】</span>去陌生市场拿名单。<br>
+                        <br>我们的<span class="font-bold text-[#a62025]">【助理】</span>会帮你们跟进这些名单直到他出席。只要他们出席并购买你将会得到联盟行销的分红。
+                    </p>
+                    <div class="img-hover-zoom" data-aos="flip-left" data-aos-delay="200" onclick="openModal(this.querySelector('img'))">
+                        <img src="https://src-site.vercel.app/4.png" alt="" class="w-full">
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                        通过广告推广你每天将会收到很多人报名。我们的客服帮你跟进他们。加入后你有佣金。我们帮你培训他们教他们如何通过脸书广告,小红书,Tiktok 来拿到更多名单。
+                    </p>
+                    <p class="text-lg font-bold text-gray-700">
+                        通过他们的业绩你也可以有被动收入。
+                    </p>
+                </div>
+            </div>
+
+            <hr class="my-8 border-t border-gray-300">
+
+            <div class="bg-blue-50 p-6 md:p-8 rounded-2xl shadow-inner text-center">
+                <h3 class="text-2xl md:text-3xl font-bold text-[#a62025] mb-4">被动收入计算</h3>
+                <p class="text-lg text-gray-700 mb-6">
+                    想像一下每一天你有10位你邀请来的联盟行销出广告他们每个月都可以成交10单你每个月的被动收入就是
+                </p>
+                <div class="flex justify-center items-center mb-6">
+                    <span class="text-4xl md:text-6xl font-extrabold text-[#a62025] count-up" data-count="9000">0</span>
+                </div>
+                <div class="img-hover-zoom" data-aos="flip-left" data-aos-delay="200" onclick="openModal(this.querySelector('img'))">
+                   <img src="https://src-site.vercel.app/5.png" alt="工作流程图片" class="w-full">
+                </div>
+            </div>
+        </section>
+
+        <div id="imageModal" class="modal">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img class="modal-content" id="modalImage">
+        </div>
+
+        <section class="text-center my-12" data-aos="fade-up">
+            <a href="https://app.mysmartwills.com/portal/register" class="inline-block bg-[#a62025] text-white text-2xl md:text-3xl font-bold py-4 px-12 rounded-full shadow-lg hover:shadow-2xl transform transition-all duration-300 pulse">
+                我要加入了!!!
+            </a>
+            <div class="mt-8 text-lg text-gray-700">
+                <p class="font-bold mb-4">加入马上送你以下礼物:</p>
+                <ul class="list-none space-y-2 max-w-2xl mx-auto text-left">
+                    <li class="bg-orange-100 p-3 rounded-xl border border-red-200" data-aos="fade-right">
+                        <span class="font-semibold text-[#a62025] text-center block text-3xl"><i class="fas fa-gift mr-2"></i>价值 RM1266 创业礼包 <i class="fas fa-gift mr-2"></i></span>
+                    </li>
+                    <li class="bg-orange-100 p-3 rounded-xl border border-red-200" data-aos="fade-left">
+                        <span class="font-semibold text-[#a62025] text-center block text-3xl"><i class="fas fa-book mr-2"></i>RM 999 的脸书广告营销课程 <i class="fas fa-book mr-2"></i></span>
+                    </li>
+                    <li class="bg-orange-100 p-3 rounded-xl border border-red-200" data-aos="fade-right">
+                        <span class="font-semibold text-[#a62025] text-center block text-3xl"><i class="fas fa-tools mr-2"></i>系统,培训,广告视频,图片,免费助理支援 <i class="fas fa-tools mr-2"></i></span>
+                    </li>
+                    <li class="bg-orange-100 p-3 rounded-xl border border-red-200" data-aos="fade-left">
+                        <span class="font-semibold text-[#a62025] text-center block text-3xl"><i class="fas fa-hand-holding-usd mr-2"></i>还有更多等你领取 <i class="fas fa-hand-holding-usd mr-2"></i></span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        
+        <footer class="text-center text-gray-500 text-sm mt-12 pb-4" data-aos="fade-in">
+            <a href="https://wa.me/60122349929" class="inline-block bg-[#a62025] mb-6 text-white text-2xl md:text-3xl font-bold py-4 px-12 rounded-full shadow-lg hover:shadow-2xl transform transition-all duration-300">
+                <i class="fas fa-phone"></i> 欢迎联络我们
+            </a>
+            <p>我们说到做到！！！我们每个星期六都有课程</p>
+            <p>公司投资课程!聘请市场有价值的导师!</p>
+        </footer>
+
+        <div class="back-to-top" onclick="window.scrollTo({top: 0});">
+            <i class="fas fa-arrow-up"></i>
+        </div>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                once: true,
+                offset: 50
+            });
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5
+            };
+            
+            const countUpObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const el = entry.target;
+                        animateValue(el, 0, parseInt(el.getAttribute('data-count')), 2000);
+                        observer.unobserve(el); // Stop observing after animation
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.count-up').forEach(el => {
+                countUpObserver.observe(el);
+            });
+            
+            function animateValue(obj, start, end, duration) {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+
+            const backToTopButton = document.querySelector('.back-to-top');
+            window.addEventListener('scroll', function() {
+                backToTopButton.classList.toggle('active', window.pageYOffset > 300);
+            });
+        });
+
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("modalImage");
+        
+        function openModal(element) {
+            modal.style.display = "flex"; 
+            modalImg.src = element.src;
+            document.addEventListener('keydown', handleKeyDown);
+        }
+        
+        function closeModal() {
+            modal.style.display = "none";
+            document.removeEventListener('keydown', handleKeyDown);
+        }
+        
+        modal.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+        
+        function handleKeyDown(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
