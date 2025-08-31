@@ -184,23 +184,27 @@
         }
         
         .reason-card {
-            /* Updated reason card background to light red-orange gradient */
             background: linear-gradient(145deg, #ffe0e0, #fff0e0);
             border-radius: 16px;
             padding: 24px;
-            position: relative;
-            overflow: hidden;
+            display: flex;            /* 让内容横向排列 */
+            align-items: center;      /* 垂直置中 */
+            gap: 10px;                /* X 和文字之间的间隔 */
             transition: all 0.4s ease;
         }
-        
+
         .reason-card::before {
             content: '✕';
-            position: absolute;
-            top: 15px;
-            left: 20px;
-            font-size: 28px;
+            position: static;         /* 不再用绝对定位 */
+            font-size: 24px;
             font-weight: bold;
-            color: #a62025; /* Retaining red 'X' for consistency */
+            color: #a62025;
+            flex-shrink: 0;           /* 防止缩小 */
+        }
+
+        .reason-card p {
+            margin: 0;
+            text-align: left;
         }
         
         .reason-card:hover {
@@ -291,24 +295,24 @@
             <div class="bg-white rounded-3xl p-6 shadow-lg text-center mt-12">
                 <div class="grid md:grid-cols-2 gap-8">
                     <div class="reason-card" data-aos="fade-right">
-                        <p class="text-lg font-medium text-gray-800 ml-8">I'm shy and don't like asking people to support my product.</p>
+                        <p class="text-lg font-medium text-gray-800">I'm shy and don't like asking people to support my product.</p>
                     </div>
                     
                     <div class="reason-card" data-aos="fade-left">
-                        <p class="text-lg font-medium text-gray-800 ml-8">I have no sales experience, I really don't know how to sell.</p>
+                        <p class="text-lg font-medium text-gray-800">I have no sales experience, I really don't know how to sell.</p>
                     </div>
                     
                     <div class="reason-card" data-aos="fade-right">
-                        <p class="text-lg font-medium text-gray-800 ml-8">I'm already tired after coming home from work, I have no time for anything else.</p>
+                        <p class="text-lg font-medium text-gray-800">I'm already tired after coming home from work, I have no time for anything else.</p>
                     </div>
                     
                     <div class="reason-card" data-aos="fade-left">
-                        <p class="text-lg font-medium text-gray-800 ml-8">I don't have business capital; starting a business costs at least a few thousand.</p>
+                        <p class="text-lg font-medium text-gray-800">I don't have business capital; starting a business costs at least a few thousand.</p>
                     </div>
                 </div>
                 
                 <p class="text-center text-xl font-medium mt-12 text-gray-700" data-aos="zoom-in">
-                    Now our <span class="font-bold text-green-600 gradient-text">[PLAN]</span> can solve your problems above and also bring you
+                    Now our <span class="font-bold text-green-600 gradient-text">[Business Model]</span> can solve your problems above and also bring you
                     <br>
                     <span class="font-bold text-green-600 text-2xl md:text-3xl gradient-text">[PASSIVE INCOME]</span>
                 </p>
@@ -318,16 +322,16 @@
         <section class="mb-20">
             <div class="text-center mb-12 md:mb-20">
                 <p class="text-xl md:text-2xl font-semibold text-center text-gray-700" data-aos="fade-down">
-                    In this era, to make money, you must combine:
+                    In this era, to make money, must consist of:
                 </p>
                 <div class="flex items-center justify-center space-x-2 mt-6 flex-wrap">
-                    <span class="benefit-badge" data-aos="zoom-in" data-aos-delay="100">1. [A Huge Market]</span>
+                    <span class="benefit-badge" data-aos="zoom-in" data-aos-delay="100">1. A Huge Market</span>
                 </div>
                     <div class="flex items-center justify-center space-x-2 mt-6 flex-wrap">
-                    <span class="benefit-badge" data-aos="zoom-in" data-aos-delay="300">2. [A High-Demand Product]</span>
+                    <span class="benefit-badge" data-aos="zoom-in" data-aos-delay="300">2. A High-Demand Product</span>
                 </div>
                     <div class="flex items-center justify-center space-x-2 mt-6 flex-wrap">
-                    <span class="benefit-badge" data-aos="zoom-in" data-aos-delay="500">3. [A Business Model That Fits Modern People]</span>
+                    <span class="benefit-badge" data-aos="zoom-in" data-aos-delay="500">3. A Business Model That Fits Modern People</span>
                 </div>
             </div>
 
@@ -375,7 +379,7 @@
 
             <div class="bg-white rounded-3xl p-6 shadow-lg text-center mt-12" data-aos="fade-up">
                 <h3 class="font-bold text-2xl text-[#a62025] mb-4">Training</h3>
-                <p class="text-gray-700 mb-4 text-lg">We provide training every Saturday, teaching you marketing, advertising, and Xiaohongshu (Little Red Book) operations!</p>
+                <p class="text-gray-700 mb-4 text-lg">We provide training every Saturday, teaching you marketing, advertising, and Xiaohongshu (Red Book) operations!</p>
                 <div class="grid grid-cols-1 md:grid-cols-1 gap-0 mt-8">
                     <div class="img-hover-zoom" data-aos="flip-left" onclick="openModal(this.querySelector('img'))">
                         <img src="https://src-site.vercel.app/4_1.png" alt="Training session" class="shadow w-full">
@@ -390,10 +394,10 @@
                 <div class="md:w-1/2">
                     <p class="text-lg text-gray-700 leading-relaxed mb-4">
                         Your job is just to send the <span class="font-bold text-[#a62025]">[advertisements]</span> we prepare for you to your friends or get leads from the cold market through <span class="font-bold text-[#a62025]">[Facebook Ads]</span>.<br>
-                        <br>Our <span class="font-bold text-[#a62025]">[assistants]</span> will help you follow up with these leads until they attend. As long as they attend and make a purchase, you will get a commission from our affiliate marketing program.
+                        <br>Our <span class="font-bold text-[#a62025]">[Customer service]</span> will help you follow up with these leads until they attend. As long as they attend and make a purchase, you will get a commission from our affiliate marketing program.
                     </p>
                     <div class="img-hover-zoom" data-aos="flip-left" data-aos-delay="200" onclick="openModal(this.querySelector('img'))">
-                        <img src="https://src-site.vercel.app/4e.png" alt="Workflow diagram" class="w-full">
+                        <img src="https://src-site.vercel.app/4ee.jpg" alt="Workflow diagram" class="w-full">
                     </div>
                 </div>
                 <div class="md:w-1/2">
